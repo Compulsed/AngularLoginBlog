@@ -1,0 +1,17 @@
+<div ng-controller="BlogListingController">
+
+  <accordion close-others="oneAtATime">
+
+    <accordion-group ng-repeat="post in posts">
+      <accordion-heading>
+        {{post.title | ucfirst }}
+        <span class="glyphicon glyphicon-remove pull-right" ng-click="remove(post, $event)" ng-show="isAdmin()"></span> <span class="time pull-right" am-time-ago="post.posted"></span>
+      </accordion-heading>
+
+      <div class="markdown-container" btf-markdown="post.contents"></div>
+
+      <a href="/blog/{{post._id}}">Make a comment</a>
+    </accordion-group>
+
+  </accordion>
+</div>

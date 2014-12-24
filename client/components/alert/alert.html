@@ -1,0 +1,8 @@
+<!-- Must use the controller, AlertCtl or there will be an error with closing the alerts -->
+<div class="container alert-container">
+  <div class="col-lg-12">
+    <div ng-controller="AlertCtrl">
+      <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+    </div>
+  </div>
+</div>

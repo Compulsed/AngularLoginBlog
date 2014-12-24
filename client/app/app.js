@@ -5,7 +5,13 @@ angular.module('angularLoginBlogApp', [
   'ngResource',
   'ngSanitize',
   'ui.router',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'btford.markdown',
+  'angularMoment',
+  'hljs',
+  'angular.filter',
+  'angular-loading-bar',
+  'ngAnimate'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

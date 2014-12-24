@@ -4,7 +4,16 @@ angular.module('angularLoginBlogApp')
   .controller('NavbarCtrl', function ($scope, $location, Auth) {
     $scope.menu = [{
       'title': 'Home',
-      'link': '/'
+      'link': '/',
+    }, {
+      'title': 'Blogs',
+      'link': '/blogs'
+    }, {
+      'title': 'Projects',
+      'link': '/project'
+    }, {
+      'title': 'About',
+      'link': '/about'
     }];
 
     $scope.isCollapsed = true;

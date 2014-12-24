@@ -1,0 +1,44 @@
+<div ng-controller="PostBlogController">
+
+  <div class="row">
+    <div class="col-lg-12">
+
+      <form novalidate name="blogForm">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input class="form-control" ng-model="post.title" required />
+        </div>
+
+        <div class="form-group">
+          <label for="contents">Contents</label>
+          <textarea id="blog-input" class="form-control" ng-model="post.contents" rows="10" required></textarea>
+        </div>
+
+        <input type="submit" value="Submit" class="btn btn-primary" ng-click="postEntry()"/>
+        <button class="btn btn-primary" ng-click="previewHighlight()">Preview Syntax Highlighting</button>
+      </form>
+
+    </div>
+  </div>
+
+
+  <div class="blogPost-spacing">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1>Preview</h1>
+      </div>
+    </div>
+
+    <div class="row blogPost-borders">
+      <div class="col-lg-12">
+
+        <h2>{{ post.title }}</h2>
+        <hr />
+
+        <div hljs class="markdown-container" btf-markdown="post.contents"></div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularLoginBlogApp')
-  .controller('MainCtrl', function ($scope, $http) {
+  .controller('AboutController', function ($scope, $http) {
     $scope.awesomeThings = [];
 
     $http.get('/api/things').success(function(awesomeThings) {
@@ -19,6 +19,4 @@ angular.module('angularLoginBlogApp')
     $scope.deleteThing = function(thing) {
       $http.delete('/api/things/' + thing._id);
     };
-
-    $scope.markdown = '#hello \n##my is dale \n#### heheheh';
   });

@@ -15,10 +15,30 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
     padding: 0.2em 0;
 }
 
+body {
+  min-height: 2000px;
+}
+
+.markdown-container img{
+  display: table-cell;
+  max-width: 100%;
+}
+
+
 // Component styles are injected through grunt
 // injector
+@import 'about/about.scss';
 @import 'account/login/login.scss';
 @import 'admin/admin.scss';
+@import 'blogs/blog-listing/blog-listing.scss';
+@import 'blogs/blog/blog.scss';
+@import 'blogs/blogs.scss';
 @import 'main/main.scss';
+@import 'post/post-blog/post-blog.scss';
+@import 'post/post.scss';
+@import 'project/project.scss';
+@import 'alert/alert.scss';
+@import 'footer/footer.scss';
 @import 'modal/modal.scss';
+@import 'my-header/my-header.scss';
 // endinjector

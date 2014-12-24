@@ -1,0 +1,21 @@
+.blogPost-spacing {
+  margin: 50px 0 50px;
+}
+
+.blogPost-borders {
+  border: 1px solid #e3e3e3;
+  border-radius: 3px;
+  background: #fff;
+}
+
+.form-group input.ng-invalid.ng-touched,
+.form-group textarea.ng-invalid.ng-touched {
+  border: 1px solid #FF5722;
+  background-color: #FFCCBC;
+}
+
+.form-group input.ng-valid.ng-touched,
+.form-group textarea.ng-valid.ng-touched {
+  border: 1px solid #4CAF50;
+  background-color: #A5D6A7;
+}

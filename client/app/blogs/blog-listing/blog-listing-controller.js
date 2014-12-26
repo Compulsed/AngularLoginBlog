@@ -53,6 +53,10 @@
         });
     };
 
+    $scope.edit = function(post, event){
+      console.log('edit clicked!');
+    }
+
     $scope.status = {
       isFirstOpen: true,
       isFirstDisabled: false

@@ -25,6 +25,8 @@ body {
 }
 
 
+@import '../bower_components/highlightjs/styles/github.css';
+
 // Component styles are injected through grunt
 // injector
 @import 'about/about.scss';

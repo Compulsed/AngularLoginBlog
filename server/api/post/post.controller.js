@@ -1,23 +1,79 @@
 /**
  * Using Rails-like standard naming convention for endpoints.
- * GET     /things              ->  index
- * POST    /things              ->  create
- * GET     /things/:id          ->  show
- * PUT     /things/:id          ->  update
- * DELETE  /things/:id          ->  destroy
+ * GET     /posts              ->  index
+ * POST    /posts              ->  create
+ * GET     /posts/:id          ->  show
+ * PUT     /posts/:id          ->  update
+ * DELETE  /posts/:id          ->  destroy
  */
 
 'use strict';
 
 var _ = require('lodash');
 var Post = require('./post.model');
+var async = require('async');
 
-// Get list of things
+// Get list of posts
 exports.index = function(req, res) {
-  Post.find(function (err, things) {
-    if(err) { return handleError(res, err); }
-    return res.json(200, things);
+  var query = {};
+
+  query.limit     =  req.query.limit    || 10;
+
+  query.next      =  req.query.next     || new Date(0);
+  query.previous  =  req.query.previous || new Date(0);
+
+  query.info      =  req.query.info     || false;
+
+  console.log(query);
+
+  async.parallel({
+    getPostInfo: function(callback){
+
+      // If request does not want collection information, do not request any
+      if(query.info === false)
+        callback(null, {});
+      else {
+        Post.find().count().exec(function (err, count){
+          callback(null, {
+            totalItems: count // May not work
+          });
+        });
+      }
+
+    },
+
+    getPosts: function(callback){
+      console.log('FINDING GREATER THAN ---->', query.next);
+
+      var PostsQuery =
+        Post
+        .find({
+          posted: {
+            $gte: query.next
+          }
+        })
+      .sort()
+      .limit(query.limit);
+
+
+      callback(null, PostsQuery);
+    }
+
+  // Once the parallel requests have been completed, run this
+  }, function(err, results){
+
+    results.getPosts.exec(function (err, posts) {
+      if(err) { return handleError(res, err); }
+
+      return res.json(200, {
+        data : posts,
+        info : results.getPostInfo
+      });
+    });
+
+
   });
+
 };
 
 // Get a single post

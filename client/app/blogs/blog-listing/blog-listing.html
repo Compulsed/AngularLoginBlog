@@ -1,20 +1,41 @@
-<div ng-controller="BlogListingController">
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div ng-controller="BlogListingController">
 
-  <accordion close-others="oneAtATime">
+        <div class="row">
+          <div class="col-lg-12">
 
-    <accordion-group ng-repeat="post in posts">
-      <accordion-heading>
-        {{post.title | ucfirst }}
+            <pagination
+            ng-click="pageChanged()" direction-links="false"
+            boundary-links="true" total-items="totalItems" items-per-page="itemsPerPage"
+            ng-model="currentPage"
+            class="pull-right"
+            >
+          </pagination>
+        </div>
+      </div>
 
-        <span class="glyphicon glyphicon-remove pull-right" ng-click="remove(post, $event)" ng-show="isAdmin()"></span>
-        <span class="glyphicon glyphicon-pencil pull-right" ng-click="edit(post, $event)" ng-show="isAdmin()"></span> 
-        <span class="time pull-right" am-time-ago="post.posted"></span>
-      </accordion-heading>
 
-      <div class="markdown-container" btf-markdown="post.contents"></div>
+      <accordion close-others="oneAtATime">
 
-      <a href="/blog/{{post._id}}">Make a comment</a>
-    </accordion-group>
+        <accordion-group ng-repeat="post in posts">
+          <accordion-heading>
+            {{post.title | ucfirst }}
 
-  </accordion>
+            <span class="glyphicon glyphicon-remove pull-right" ng-click="remove(post, $event)" ng-show="isAdmin()"></span>
+            <span class="glyphicon glyphicon-pencil pull-right" ng-click="edit(post, $event)" ng-show="isAdmin()"></span>
+            <span class="time pull-right" am-time-ago="post.posted"></span>
+          </accordion-heading>
+
+          <div class="markdown-container" btf-markdown="post.contents"></div>
+
+          <a href="/blog/{{post._id}}">Make a comment</a>
+        </accordion-group>
+
+      </accordion>
+
+    </div>
+  </div>
+</div>
 </div>

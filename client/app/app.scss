@@ -24,6 +24,8 @@ body {
   max-width: 100%;
 }
 
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
 
 @import '../bower_components/highlightjs/styles/github.css';
 

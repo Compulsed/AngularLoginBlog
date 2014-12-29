@@ -17,14 +17,16 @@ var async = require('async');
 exports.index = function(req, res) {
   var query = {};
 
-  query.limit     =  req.query.limit    || 10;
+  query.limit     =  req.query.limit        || 10;
+  query.currentPage = req.query.currentPage || 1;
 
-  query.next      =  req.query.next     || new Date(0);
-  query.previous  =  req.query.previous || new Date(0);
+  query.next      =  req.query.next         || new Date(0);
+  query.previous  =  req.query.previous     || new Date(0);
+  query.info      =  req.query.info         || false;
 
-  query.info      =  req.query.info     || false;
 
-  console.log(query);
+  console.log(req.query);
+  // console.log(query);
 
   async.parallel({
     getPostInfo: function(callback){
@@ -35,26 +37,19 @@ exports.index = function(req, res) {
       else {
         Post.find().count().exec(function (err, count){
           callback(null, {
-            totalItems: count // May not work
+            totalItems: count
           });
         });
       }
 
     },
 
+    // This is bad as it returns the ENTIRE collection
     getPosts: function(callback){
-      console.log('FINDING GREATER THAN ---->', query.next);
-
       var PostsQuery =
         Post
-        .find({
-          posted: {
-            $gte: query.next
-          }
-        })
-      .sort()
-      .limit(query.limit);
-
+        .find({})
+      .sort({posted: -1})
 
       callback(null, PostsQuery);
     }
@@ -66,7 +61,7 @@ exports.index = function(req, res) {
       if(err) { return handleError(res, err); }
 
       return res.json(200, {
-        data : posts,
+        data : posts.slice( (query.currentPage - 1) * query.limit, query.currentPage * query.limit),
         info : results.getPostInfo
       });
     });
